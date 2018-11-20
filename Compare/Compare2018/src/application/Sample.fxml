@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+	<center>
+		<AnchorPane fx:id="anchorPane1" minHeight="100.0" minWidth="500.0" prefHeight="500.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+			<children>
+				<Label fx:id="fileT" text="Datei" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="42.0" />
+	            <Button mnemonicParsing="false" onAction="#startBtAction" text="Start" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="92.0" />
+				<SplitPane dividerPositions="0.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+					<items>
+						<AnchorPane fx:id="anchorPane2" onDragDropped="#anchorPane2Dropped" onDragOver="#anchorPaneDragOver">
+							<children>
+								<Label alignment="CENTER" contentDisplay="CENTER" text="Objekt 1" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+								<TextField fx:id="pathField1" onKeyReleased="#pathField1KeyReleased" promptText="Datei/Ordner" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="42.0" />
+                       			<Button mnemonicParsing="false" onAction="#chooseFile1BtAction" text="Datei..." AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="42.0" />
+                        			<Button mnemonicParsing="false" onAction="#chooseDir1BtAction" text="Ordner..." AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="42.0" />
+                        			<Label alignment="CENTER" maxWidth="114.0" minWidth="114.0" prefWidth="114.0" text="Durchsuchen" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0" />
+							</children>
+						</AnchorPane>
+						<AnchorPane fx:id="anchorPane3" onDragDropped="#anchorPane3Dropped" onDragOver="#anchorPaneDragOver">
+							<children>
+								<Label alignment="CENTER" text="Objekt 2" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+								<TextField fx:id="pathField2" onKeyReleased="#pathField2KeyReleased" promptText="Datei/Ordner" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="42.0" />
+                        			<Button mnemonicParsing="false" onAction="#chooseFile2BtAction" text="Datei..." AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="42.0" />
+                        			<Label alignment="CENTER" maxWidth="114.0" minWidth="114.0" prefWidth="114.0" text="Durchsuchen" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0" />
+                        			<Button mnemonicParsing="false" onAction="#chooseDir2BtAction" text="Ordner..." AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="42.0" />
+							</children>
+						</AnchorPane>
+					</items>
+				</SplitPane>
+				<Label maxWidth="126.0" minWidth="126.0" prefWidth="126.0" text="Vergleichen" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+	            <Button layoutX="74.0" layoutY="463.0" mnemonicParsing="false" onAction="#addBtAction" text="+" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" />
+	            <Button layoutX="98.0" layoutY="463.0" mnemonicParsing="false" onAction="#fullBtAction" text="Komplett" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" />
+	            <Label fx:id="resultT" maxWidth="126.0" minWidth="126.0" prefWidth="126.0" text="&lt;nicht berechnet&gt;" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="42.0" />
+	            <ComboBox fx:id="langCb" onAction="#langCbAction" prefWidth="196.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="42.0" />
+	            <Label text="Rekursion" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="12.0" />
+	            <ComboBox fx:id="recursionCb" onAction="#recursionCbAction" prefWidth="226.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="12.0" />
+			</children>
+		</AnchorPane>
+	</center>
+</BorderPane>

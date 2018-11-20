@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import li.tmj.ui.controls.ObjectCombobox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="li.tmj.ui.fx.MainController">
+	<center>
+		<AnchorPane fx:id="anchorPane1" minHeight="100.0" minWidth="600.0" prefHeight="500.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+			<children>
+				<Label fx:id="fileT" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="47.0" />
+				<Label fx:id="recursionT" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="12.0" />
+				<ObjectCombobox fx:id="langCb" onAction="#langCbAction" prefWidth="150.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
+				<Button layoutX="74.0" layoutY="463.0" mnemonicParsing="false" onAction="#addBtAction" text="+" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="42.0" />
+				<ObjectCombobox fx:id="recursionCb" onAction="#recursionCbAction" prefWidth="160.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="82.0" />
+				<SplitPane dividerPositions="0.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+					<items>
+						<AnchorPane fx:id="anchorPane2" onDragDropped="#anchorPane2Dropped" onDragOver="#anchorPaneDragOver">
+							<children>
+								<Label fx:id="object1T" alignment="CENTER" contentDisplay="CENTER" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+								<Label fx:id="search1T" alignment="CENTER" maxWidth="114.0" minWidth="114.0" prefWidth="114.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0" />
+								<TextField fx:id="pathField1" onKeyReleased="#pathField1KeyReleased" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="42.0" />
+								<Button fx:id="file1Bt" mnemonicParsing="false" onAction="#chooseFile1BtAction" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="42.0" />
+								<Button fx:id="folder1Bt" mnemonicParsing="false" onAction="#chooseDir1BtAction" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="42.0" />
+							</children>
+						</AnchorPane>
+						<AnchorPane fx:id="anchorPane3" onDragDropped="#anchorPane3Dropped" onDragOver="#anchorPaneDragOver">
+							<children>
+								<Label fx:id="object2T" alignment="CENTER" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+								<Label fx:id="search2T" alignment="CENTER" maxWidth="114.0" minWidth="114.0" prefWidth="114.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0" />
+								<TextField fx:id="pathField2" onKeyReleased="#pathField2KeyReleased" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="42.0" />
+								<Button fx:id="file2Bt" mnemonicParsing="false" onAction="#chooseFile2BtAction" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="42.0" />
+								<Button fx:id="folder2Bt" mnemonicParsing="false" onAction="#chooseDir2BtAction" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="42.0" />
+							</children>
+						</AnchorPane>
+					</items>
+				</SplitPane>
+				<Label fx:id="compareT" maxWidth="126.0" minWidth="126.0" prefWidth="126.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+				<Label fx:id="resultT" maxWidth="126.0" minWidth="126.0" prefWidth="126.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="42.0" />
+				<Button fx:id="startBt" defaultButton="true" mnemonicParsing="false" onAction="#startBtAction" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="92.0" />
+				<Button fx:id="entireBt" layoutX="98.0" layoutY="463.0" mnemonicParsing="false" onAction="#entireBtAction" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" />
+			</children>
+		</AnchorPane>
+	</center>
+</BorderPane>

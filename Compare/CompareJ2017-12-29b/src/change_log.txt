@@ -1,0 +1,52 @@
+Rekursion implementiert. Die Element Objekte werden jeweils mit einer Datei/Ordner entsprechend der Rekursion aufgerufen.
+Da hierfür nur von der übergebenen Datei/Ordner abhändige Methoden notwendig wurden, wurde das Konzept insgesamt umgestellt und die Dateiabhängigkeit der Elemente entfernt.
+FSCompareCriterionElement bezieht sich jetzt nur noch auf die jeweilige Eigenschaft (value property) einer Datei (aka Zelle). Die eigentlichen Kriterien erben jetzt direkt von der Criterion-Klasse, so dass die dass sie nur noch einmal pro Zeile existieren und die Prüfung auf Gleichheit aller Kriterien pro Zeile im Konstruktor entfällt.
+
+FilePath benutzt jetzt beim compare auch readValue(), d. h. ohne Dateinamen.
+
+GUI Layout verbessert.
+
+Logging benutzt jetzt Mac- oder Windowsspezifische Pfade.
+Propertydatei für Loggingeinstellungen.
+neu: Logging
+
+RecursionType und FSCompareCriteria sind jetzt enums.
+
+ObjectCombobox zur einfacheren implementierung einer sinnvollen Combobox<T>.
+
+LanguageSet Objektstruktur überarbeitet, unterteilt, externe Resourcen.
+
+Durch das bessere Objektkonzept mit ObjektCombobox, enums und Localization ist FSCompareCriteriaPlaceholder überflüssig geworden.
+
+FSCompareObject erledigt den compare Vorgang nun im Service.
+Die rekursiven Vorgänge werden absichtlich nacheinander abgearbeitet ohne separate Threads, da sonst parallel potentiell viele Dateien gleichzeitig bearbeitet werden, was keinen Gwinn bringt, da alles auf dieselbe Festplatte zugreift. Vermutlich wäre es eher langsamer, da die Festplatte mehr Random Access Vorgänge benötigt.
+
+Die compare Vorgänge der verschiedenen FSCompareCriterion Objekte werden nun in Threads ausgeführt. Es handelt sich zwar auch hier um nur eine Festplatte, aber (vermutlich) unterschiedliche Kriterien.
+In Klasse workInThreads kann dies z.Z. eingestellt werden: Einerseits können so verschiedene Kriterien parallel abgearbeitet werden, aber andererseits könnte im konkreten Fall auch das erste Kriterium mit false ausreichend für das gesamte Ergebnis sein. Im Threads Fall wird die Prüfung des ersten Kriteriums möglicherweise langsamer und dadurch die Berechnung insgesamt.
+Für eine finale Version dieses Programms sollte dies getestet und ein tragfähiger Kompromiss implementiert werden.
+
+FSCompareObject verwaltet einen running Status. Dadurch werden die Buttons entsprechend gesetzt.
+Der Hauptservice FSCompareObjectService kann gestoppt werden. Die einzelnen compare Methoden der criterion Objekte laufen aber noch durch, was bei Content mit großen Dateien oder dem rekursiven DirSize mit großen Verzeichnisbäumen eine Weile dauern kann.
+Rekursive Vergleiche werden aber abgebrochen.
+
+
+
+Known Bugs:
+
+Pause/Resume hat bisher auf den Service keine Wirkung
+
+Einige Einstellungskombination sind nicht sinnvoll und sollten abgefangen werden, z. B.
+  ein rekursiver Aufruf der rekursiven Variante von DirSize. Letzteres berechnet bereits die Stärke des gesamten Verzeichnisbaumes.
+  ein rekursiver Vergleich der Dateipfade eines Ordners ist natürlich auch Quatsch.
+
+Bisher sind nur Rekursion "aus" oder "alles" implementiert. Besonders alles ohne oberstes Element - also zwei Verzeichnisinhalte zu vergleichen - wäre sicher eine der sinnvollsten Varianten.
+
+Sofern FSCompareObjectService.workInThreads==true, wird immer die Komplettsuche ausgeführt, weil die einzelnen Threads bereits vor dem Vergleichen angestoßen werden.
+	...sofern false funktioniert die Rekursion nicht richtig.
+
+Die Komplettsuche, bei der alle Kriterien bearbeitet werden, auch wenn das erste bereits "verschieden" ist, funktioniert bisher nicht mit Rekursion.
+  Die Komplettsuche wurde ganz am Anfang implementiert und seit dem schlecht gepflegt, weil sie mit Rekursion und Threads gegen Seiteneffekte schlägt. Das ist also sowieso ein TODO bzw. die Überlegung den Teil wegen Unsinnigkeit herauszunehmen.
+
+Aktuell wird bei negativem Vergleichsergebnis bei dem entsprechenden Kriterium auch der entsprechende Inhalt (bspw. Dateiname) aus der Anzeige gelöscht.
+
+Die Logdatei wird z.Z. vermutlich nicht begrenzt (bzw. Tinylog Standardkonfiguration).
